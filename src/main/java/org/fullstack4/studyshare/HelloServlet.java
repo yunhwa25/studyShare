@@ -1,4 +1,4 @@
-package org.fullstack4.studyshare.studyshare;
+package org.fullstack4.studyshare;
 
 import java.io.*;
 import javax.servlet.http.*;

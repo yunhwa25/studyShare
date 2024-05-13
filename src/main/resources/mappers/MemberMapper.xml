@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.studyshare.mapper.MemberMapper">
+<!--    <insert id="join">-->
+<!--        INSERT INTO tbl_member( user_id, name, pwd, email, jumin, birthday, addr1, addr2, job_code)-->
+<!--        VALUES ( #{user_id}, #{name}, #{pwd}, #{email}, #{jumin}, #{birthday}, #{addr1}, #{addr2}, #{job_code})-->
+<!--    </insert>-->
+
+<!--    <select id="view" resultType="org.fullstack4.springmvc.domain.MemberVO">-->
+<!--        SELECT user_id, name, pwd, email, jumin, birthday, addr1, addr2, job_code, mileage, reg_date, interest-->
+<!--        FROM tbl_member-->
+<!--        WHERE user_id = #{user_id}-->
+<!--    </select>-->
+
+<!--    <update id="modify">-->
+<!--        UPDATE tbl_member SET name = #{name},-->
+<!--                              pwd = #{pwd},-->
+<!--                              email = #{email},-->
+<!--                              addr1 = #{addr1},-->
+<!--                              addr2 = #{addr2},-->
+<!--                              interest = #{interest},-->
+<!--                              job_code = #{job_code}-->
+<!--        WHERE user_id = #{user_id}-->
+<!--    </update>-->
+
+<!--    <delete id="leave">-->
+<!--        DELETE FROM tbl_member-->
+<!--        WHERE user_id = #{user_id}-->
+<!--    </delete>-->
+</mapper>
