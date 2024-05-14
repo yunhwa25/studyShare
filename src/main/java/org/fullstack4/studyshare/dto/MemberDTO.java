@@ -5,12 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.core.config.plugins.validation.constraints.NotBlank;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
@@ -19,10 +15,14 @@ import java.time.LocalDate;
 @Builder
 public class MemberDTO {
     private int idx;
+    @NotBlank
+    @Pattern(regexp = "^[a-z0-9]{4,16}", message = "4~16자의 영어 소문자 및 숫자만 입력이 가능합니다.")
     private String user_id;
     private String name;
     private String pwd;
     private String phone;
+//    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$", message = "email@email.com 형식으로 입력해주세요")
     private String email;
     private LocalDate reg_date;
     private LocalDate login_date;
