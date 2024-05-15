@@ -29,4 +29,19 @@ public class LoginServiceImpl implements LoginServiceIf {
 
         return memberDTO;
     }
+
+    @Override
+    public int update_login_data(String user_id, String pwd) {
+        return loginMapper.update_login_data(user_id, pwd);
+    }
+
+    @Override
+    public int update_try_count(String user_id) {
+        return loginMapper.update_try_count(user_id);
+    }
+
+    @Override
+    public int try_count(String user_id) {
+        return loginMapper.try_count(user_id);
+    }
 }

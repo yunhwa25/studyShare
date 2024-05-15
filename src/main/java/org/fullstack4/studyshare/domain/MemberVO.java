@@ -20,4 +20,5 @@ public class MemberVO {
     private LocalDate login_date;
     private String lock_yn;
     private String limit_yn;
+    private int try_count;
 }

@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Builder
 public class MemberDTO {
     private int idx;
-    @NotBlank
+//    @NotBlank
     @Pattern(regexp = "^[a-z0-9]{4,16}", message = "4~16자의 영어 소문자 및 숫자만 입력이 가능합니다.")
     private String user_id;
     private String name;
@@ -28,6 +28,7 @@ public class MemberDTO {
     private LocalDate login_date;
     private String lock_yn;
     private String limit_yn;
+    private int try_count;
 
     private String phone_0;
     private String phone_1;
