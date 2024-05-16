@@ -10,6 +10,13 @@ public interface LoginMapper {
     int update_try_count(@Param("user_id") String id);
     int try_count(@Param("user_id") String id);
 
+    int update_tmp_pwd(@Param("user_id") String id, @Param("tmp_pwd") String tmp_pwd);
+    String get_tmp_pwd(@Param("user_id") String id);
+    int reset_tmp_pwd(@Param("user_id") String id);
+
+    int change_pwd(@Param("user_id") String user_id, @Param("pwd") String pwd);
+
+
 //    String search_id(@Param("name") String name, @Param("email") String email);
 //    int search_pwd(@Param("name") String name, @Param("email") String email, @Param("member_id") String member_id);
 //    int change_pwd(@Param("member_id") String member_id, @Param("pwd") String pwd);

@@ -25,9 +25,13 @@
   <%@ include file="/WEB-INF/common/header.jsp" %>
   <div>
     content
+    ${result}
   </div>
   <%@ include file="/WEB-INF/common/footer.jsp" %>
 </div>
 <script src="/resources/js/bootstrap.bundle.min.js"></script>
+<script>
+  if (${!empty result}) alert("${result}")
+</script>
 </body>
 </html>

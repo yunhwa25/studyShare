@@ -5,7 +5,7 @@
 <mapper namespace="org.fullstack4.studyshare.mapper.LoginMapper">
 
     <select id="login_info" resultType="org.fullstack4.studyshare.domain.MemberVO">
-        SELECT idx, user_id, name, pwd, phone, email, reg_date, login_date, lock_yn, limit_yn, try_count
+        SELECT idx, user_id, name, pwd, tmp_pwd, phone, email, reg_date, login_date, lock_yn, limit_yn, try_count
         FROM tbl_member
         WHERE user_id = #{user_id}
     </select>
@@ -30,6 +30,34 @@
         WHERE user_id = #{user_id}
     </select>
 
+    <!--  임시 패스워드 업데이트  -->
+    <update id="update_tmp_pwd">
+        UPDATE tbl_member
+        SET tmp_pwd = #{tmp_pwd}
+        WHERE user_id = #{user_id}
+    </update>
+
+    <select id="get_tmp_pwd">
+        SELECT tmp_pwd
+        FROM tbl_member
+        WHERE user_id = #{user_id}
+    </select>
+
+    <!--  임시 비밀번호 리셋  -->
+    <update id="reset_tmp_pwd">
+        UPDATE tbl_member
+        SET tmp_pwd = NULL
+        WHERE user_id = #{user_id}
+    </update>
+
+    <!-- 패스워드 변경-->
+    <update id="change_pwd">
+        UPDATE tbl_member
+        SET pwd = #{pwd}
+        WHERE user_id = #{user_id}
+    </update>
+
+
 <!--    &lt;!&ndash;아이디 찾기&ndash;&gt;-->
 <!--    <select id="search_id" resultType="String">-->
 <!--        SELECT member_id-->
@@ -42,9 +70,6 @@
 <!--        FROM tbl_member-->
 <!--        WHERE name = #{name} and email = #{email} and member_id = #{member_id} and member_state = "Y"-->
 <!--    </select>-->
-<!--    &lt;!&ndash;    비밀번호 재 설정&ndash;&gt;-->
-<!--    <update id="change_pwd">-->
-<!--        UPDATE tbl_member SET pwd = #{pwd} where member_id = #{member_id}-->
-<!--    </update>-->
+
 
 </mapper>

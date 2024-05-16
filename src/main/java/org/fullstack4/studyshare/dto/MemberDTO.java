@@ -19,7 +19,10 @@ public class MemberDTO {
     @Pattern(regexp = "^[a-z0-9]{4,16}", message = "4~16자의 영어 소문자 및 숫자만 입력이 가능합니다.")
     private String user_id;
     private String name;
+//    @NotBlank
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}", message = "8자 이상의 영문 소문자, 숫자, 특수문자를 조합해 주세요.")
     private String pwd;
+    private String tmp_pwd;
     private String phone;
 //    @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$", message = "email@email.com 형식으로 입력해주세요")
@@ -37,16 +40,16 @@ public class MemberDTO {
     private String email_id;
     private String email_domain;
 
-    public String getPhone_0(String phone) {return phone.substring(0, 2);}
+    public String getPhone_0(String phone) {return phone.substring(0, 3);}
     public String getPhone_1(String phone) {
-        if (phone.length() == 10) {
-            return phone.substring(phone.indexOf("-") + 1, phone.indexOf("-") + 3);
-        } else {
+        if (phone.length() == 12) {
             return phone.substring(phone.indexOf("-") + 1, phone.indexOf("-") + 4);
+        } else {
+            return phone.substring(phone.indexOf("-") + 1, phone.indexOf("-") + 5);
         }
     }
     public String getPhone_2(String phone) {
-        return phone.substring(phone.lastIndexOf("-"));
+        return phone.substring(phone.lastIndexOf("-") + 1);
     }
     public void setPhone(String phone_0, String phone_1, String phone_2) {
         this.phone = phone_0 + "-" + phone_1 + "-" + phone_2;

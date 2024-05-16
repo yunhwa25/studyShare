@@ -14,6 +14,7 @@ public class MemberVO {
     private String user_id;
     private String name;
     private String pwd;
+    private String tmp_pwd;
     private String phone;
     private String email;
     private LocalDate reg_date;

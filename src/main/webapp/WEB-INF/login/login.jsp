@@ -26,7 +26,14 @@
             <a href="/"><img class="mb-4" src="/resources/img/header_logo.png" height="57"></a>
             <h1 class="h3 mb-3 fw-normal">LOGIN</h1>
             <div class="form-floating">
-                <input type="text" class="form-control" name="user_id" id="user_id" value="${!empty save_id ? save_id : param.id}" maxlength="50"/>
+                <c:choose>
+                    <c:when test="${!empty param.id}">
+                        <input type="text" class="form-control" name="user_id" id="user_id" value="${param.id}" maxlength="50"/>
+                    </c:when>
+                    <c:otherwise>
+                        <input type="text" class="form-control" name="user_id" id="user_id" value="${save_id}" maxlength="50"/>
+                    </c:otherwise>
+                </c:choose>
                 <label for="user_id">아이디를 입력해주세요.</label>
             </div>
             <div class="form-floating" style="margin-bottom: 10px;">
