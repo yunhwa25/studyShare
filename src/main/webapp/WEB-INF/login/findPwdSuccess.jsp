@@ -24,11 +24,12 @@
             flex-direction: column;
             justify-content: space-between;
         }
+        .w1024 {width: 1024px; margin: 50px auto;}
     </style>
 </head>
 <body>
 <div id="container">
-    <div class="list-group text-center" style="width: 75%; margin: 50px auto;">
+    <div class="list-group text-center w1024">
         <a href="/"><img class="mb-4" src="/resources/img/header_logo.png" height="57"></a>
         <h1 style="width: 75%; margin: 0 auto 20px; text-align: center;">임시 비밀번호 확인</h1>
         <div class="list-group-item list-group-item-action" style="margin-bottom: 24px;" aria-current="true">

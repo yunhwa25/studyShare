@@ -24,14 +24,15 @@
             flex-direction: column;
             justify-content: space-between;
         }
+        .w1024 {width: 1024px; margin: 0 auto;}
     </style>
 </head>
 <body>
 <div id="container">
+    <%@ include file="/WEB-INF/common/header.jsp" %>
     <form name="frmModifyPwd" id="frmModifyPwd" method="post" action="/login/modifyPwd">
         <input type="hidden" name="user_id" id="user_id" value="${user_id}"/>
-        <div class="list-group text-center" style="width: 75%; margin: 50px auto;">
-        <a href="/"><img class="mb-4" src="/resources/img/header_logo.png" height="57"></a>
+        <div class="list-group text-center w1024">
         <h1 style="width: 75%; margin: 0 auto 20px; text-align: center;">개인정보 보호를 위해 패스워드를 변경해주세요.</h1>
             <div class="list-group-item list-group-item-action" style="margin-bottom: 24px;" aria-current="true">
                 <div class="d-flex w-100 justify-content-center" style="margin-bottom: 8px; padding-bottom: 4px;">
@@ -64,6 +65,7 @@
             </div>
         </div>
     </form>
+    <%@ include file="/WEB-INF/common/footer.jsp" %>
 </div>
 <script src="/resources/js/bootstrap.bundle.min.js"></script>
 <script>

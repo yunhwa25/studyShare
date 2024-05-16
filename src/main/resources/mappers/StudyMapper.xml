@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.studyshare.mapper.StudyMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="search_type != null">
+                <foreach collection="search_type" item="type" open="(" close=")" separator=" OR ">
+                    <if test="search_word != null and search_word != ''">
+                        <if test="type=='t'.toString()">
+                            title LIKE CONCAT('%', #{search_word}, '%')
+                        </if>
+                        <if test="type=='u'.toString()">
+                            user_id LIKE CONCAT('%', #{search_word}, '%')
+                        </if>
+                    </if>
+                </foreach>
+            </if>
+            <if test="search_date1 != null and search_date2 != null and search_date1 != '' and search_date2 != ''">
+                <trim prefix="and">
+                    reg_date BETWEEN #{search_date1} AND #{search_date2}
+                </trim>
+            </if>
+        </where>
+    </sql>
+<!--    <select id="studyTotalCount" resultType="int">-->
+<!--        SELECT COUNT(*) FROM tbl_study_board-->
+<!--        <include refid="whereCondition"></include>-->
+<!--    </select>-->
+
+<!--    <select id="studyListByPage" resultType="org.fullstack4.studyshare.domain.StudyVO">-->
+<!--        SELECT idx, writer, title, content, org_file_name, save_file_name, category, hashtag, like, sharer, reg_date, modify_date, display_start, display_end-->
+<!--        FROM tbl_study_board-->
+<!--        <include refid="whereCondition"></include>-->
+<!--        ORDER BY idx DESC-->
+<!--        LIMIT #{page_skip_count}, #{page_size}-->
+<!--    </select>-->
+
+    <select id="studyList" resultType="org.fullstack4.studyshare.domain.StudyVO">
+        SELECT idx, writer, title, content, org_file_name, save_file_name, category, hashtag, sharer, reg_date, modify_date, display_start, display_end
+        FROM tbl_study_board
+        ORDER BY idx DESC
+    </select>
+
+<!--    <select id="dataView" resultType="org.fullstack4.bookstore.domain.DataVO">-->
+<!--        SELECT data_idx, title, content, writer, org_file_name, save_file_name, reg_date, modify_date-->
+<!--        FROM tbl_bbs_data-->
+<!--        WHERE data_idx = #{data_idx}-->
+<!--    </select>-->
+
+<!--    <select id="dataPrev" resultType="org.fullstack4.bookstore.domain.DataVO">-->
+<!--        SELECT data_idx, title-->
+<!--        FROM tbl_bbs_data-->
+<!--        WHERE data_idx <![CDATA[<]]> #{data_idx}-->
+<!--        ORDER BY data_idx DESC-->
+<!--            LIMIT 1-->
+<!--    </select>-->
+
+<!--    <select id="dataNext" resultType="org.fullstack4.bookstore.domain.DataVO">-->
+<!--        SELECT data_idx, title-->
+<!--        FROM tbl_bbs_data-->
+<!--        WHERE data_idx <![CDATA[>]]> #{data_idx}-->
+<!--        ORDER BY data_idx-->
+<!--            LIMIT 1-->
+<!--    </select>-->
+
+<!--    <insert id="dataRegist">-->
+<!--        INSERT INTO tbl_bbs_data(title, content, writer, org_file_name, save_file_name)-->
+<!--        VALUES (#{title}, #{content}, #{writer}, #{org_file_name}, #{save_file_name})-->
+<!--    </insert>-->
+
+
+<!--    <update id="dataModify">-->
+<!--        UPDATE tbl_bbs_data SET-->
+<!--                                title = #{title},-->
+<!--                                content = #{content},-->
+<!--                                writer = #{writer},-->
+<!--                                org_file_name = #{org_file_name},-->
+<!--                                save_file_name = #{save_file_name},-->
+<!--                                modify_date = NOW()-->
+<!--        WHERE data_idx = #{data_idx}-->
+<!--    </update>-->
+
+<!--    <delete id="dataDelete">-->
+<!--        DELETE FROM tbl_bbs_data-->
+<!--        WHERE data_idx = #{data_idx}-->
+<!--    </delete>-->
+</mapper>

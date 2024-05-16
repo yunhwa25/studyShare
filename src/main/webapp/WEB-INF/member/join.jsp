@@ -24,6 +24,7 @@
             flex-direction: column;
             justify-content: space-between;
         }
+        .w1024 {width: 1024px; margin: 0 auto;}
     </style>
 </head>
 <body>
@@ -31,7 +32,7 @@
     <%@ include file="/WEB-INF/common/header.jsp" %>
     <h1 style="width: 75%; margin: 0 auto 20px; text-align: center;">회원가입</h1>
     <form name="frmJoin" id="frmJoin" method="post" action="/member/join">
-        <div class="list-group" style="width: 75%; margin: 0 auto;">
+        <div class="list-group w1024">
             <div class="list-group-item list-group-item-action" style="margin-bottom: 24px;" aria-current="true">
                 <div class="d-flex w-100 justify-content-center" style="margin-bottom: 8px; padding-bottom: 4px;">
                     <div class="mb-1">

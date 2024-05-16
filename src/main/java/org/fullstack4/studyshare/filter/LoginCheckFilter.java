@@ -10,20 +10,30 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Log4j2
-@WebFilter(urlPatterns = {"/my/*"})
+@WebFilter(urlPatterns = {"/study/*"})
 public class LoginCheckFilter implements Filter {
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        Filter.super.init(filterConfig);
+    }
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession();
 
-        if(session.getAttribute("loginInfo") == null) {
+        if(session.getAttribute("loginInfo") == null || session.getAttribute("loginInfo") == "") {
             resp.sendRedirect("/login/login");
             return;
         }
         chain.doFilter(req,resp);
 
+    }
+
+    @Override
+    public void destroy() {
+        Filter.super.destroy();
     }
 }
 

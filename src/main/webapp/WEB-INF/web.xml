@@ -45,8 +45,4 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
 </servlet-mapping>
-
-<!--<welcome-file-list>-->
-<!--    <welcome-file>org.fullstack4.studyshare.controller.LoginController</welcome-file>-->
-<!--</welcome-file-list>-->
 </web-app>

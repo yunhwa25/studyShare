@@ -51,13 +51,13 @@ public class MemberController {
     }
 
 
-    @GetMapping("/modify")
-    public String modifyGET(@Valid MemberDTO memberDTO,
+    @PostMapping("/modify")
+    public String modifyPOST(@Valid MemberDTO memberDTO,
                              HttpSession session,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
         log.info("===============================");
-        log.info("MemberController >> modifyGET()");
+        log.info("MemberController >> modifyPOST()");
         log.info("memberDTO : " + memberDTO.toString());
         log.info("===============================");
 
@@ -78,6 +78,7 @@ public class MemberController {
         log.info("===============================");
 
         if (result > 0) {
+            redirectAttributes.addFlashAttribute("result", "정상적으로 수정되었습니다.");
             return "redirect:/member/view";
         }
         else {
@@ -85,14 +86,18 @@ public class MemberController {
         }
     }
 
-    @PostMapping("/leave")
-    public String leavePOST(@Valid MemberDTO memberDTO,
-                            HttpSession session) {
+    @GetMapping("/leave")
+    public String leaveGET(
+            HttpSession session,
+            RedirectAttributes redirectAttributes
+    ) {
         log.info("===============================");
-        log.info("MemberController >> leavePOST()");
+        log.info("MemberController >> leaveGET()");
 
-        int result = memberService.leave(memberDTO.getUser_id());
+        String user_id = (String)session.getAttribute("loginInfo");
+        int result = memberService.leave(user_id);
         if (result > 0) {
+            redirectAttributes.addFlashAttribute("result", "정상적으로 탈퇴 처리되었습니다.");
             session.invalidate();
             return "redirect:/";
         }

@@ -18,14 +18,22 @@
       flex-direction: column;
       justify-content: space-between;
     }
+    .w1024 {width: 1024px; margin: 0 auto;}
   </style>
 </head>
 <body>
 <div id="container">
   <%@ include file="/WEB-INF/common/header.jsp" %>
-  <div>
-    content
-    ${result}
+  <div class="w1024">
+    <c:if test="${!empty sessionScope.loginInfo}">
+      <h1 style="width: 75%; margin: 0 auto 20px; text-align: center;">
+          ${sessionScope.loginInfo}님, 안녕하세요!
+      </h1>
+      <button class="w-100 btn btn-lg btn-primary mb-3 text-center" style="max-width:330px; display: block; margin: 0 auto;" type="button" onclick="location.href='/study/list'">오늘의 학습 확인하기</button>
+    </c:if>
+    <c:if test="${empty sessionScope.loginInfo}">
+      <h1 style="width: 75%; margin: 0 auto 20px; text-align: center;">서비스는 로그인 후 이용하실 수 있습니다.</h1>
+    </c:if>
   </div>
   <%@ include file="/WEB-INF/common/footer.jsp" %>
 </div>

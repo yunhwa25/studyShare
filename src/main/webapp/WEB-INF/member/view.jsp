@@ -24,14 +24,15 @@
             flex-direction: column;
             justify-content: space-between;
         }
+        .w1024 {width: 1024px; margin: 0 auto;}
     </style>
 </head>
 <body>
 <div id="container">
     <%@ include file="/WEB-INF/common/header.jsp" %>
     <h1 style="width: 75%; margin: 0 auto 20px; text-align: center;">Mypage</h1>
-    <form name="frmLeave" id="frmLeave" method="post" action="/member/leave">
-        <div class="list-group" style="width: 75%; margin: 0 auto;">
+    <form name="frmLeave" id="frmLeave" method="post" action="/member/modify">
+        <div class="list-group w1024">
             <div class="list-group-item list-group-item-action" style="margin-bottom: 24px;" aria-current="true">
                 <div class="d-flex w-100 justify-content-center" style="margin-bottom: 8px; padding-bottom: 4px;">
                     <div class="mb-1">
@@ -78,9 +79,9 @@
                 </div>
             </div>
             <div class="mb-5">
-                <button type="button" class="btn btn-outline-primary btn-sm" id="btnModify" disabled onclick="location.href='/member/modify'">변경하기</button>
+                <button type="submit" class="btn btn-outline-primary btn-sm" id="btnModify" disabled>변경하기</button>
                 <button type="reset" class="btn btn-outline-secondary btn-sm">초기화</button>
-                <button type="submit" class="btn btn-outline-danger btn-sm">회원탈퇴</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" id="btnLeave">회원탈퇴</button>
             </div>
         </div>
     </form>
@@ -88,10 +89,11 @@
 </div>
 <script src="/resources/js/bootstrap.bundle.min.js"></script>
 <script>
-
     if (${!empty err}) alert("${err}")
+    if (${!empty result}) alert("${result}")
 
     const btnModify = document.getElementById("btnModify");
+    const btnLeave = document.getElementById("btnLeave");
 
     const pwdDOM = document.getElementById("pwd");
 
@@ -109,6 +111,12 @@
         else btnModify.disabled = false;
     }, false)
 
+    btnLeave.addEventListener("click", function(e) {
+        let confirm_flag = confirm("정말 탈퇴하시겠습니까?")
+        if (confirm_flag) {
+            location.href = "/member/leave";
+        }
+    }, false)
 </script>
 </body>
 </html>
