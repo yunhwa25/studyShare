@@ -8,14 +8,16 @@ import java.util.List;
 public interface StudyMapper {
 
     // 페이징
-//    int studyTotalCount(PageRequestDTO pageRequestDTO);
-//    List<StudyVO> studyListByPage(PageRequestDTO pageRequestDTO);
-    List<StudyVO> studyList();
-//    StudyVO studyView(int idx);
+    int studyTotalCount(PageRequestDTO pageRequestDTO);
+    List<StudyVO> studyListByPage(PageRequestDTO pageRequestDTO);
+    List<StudyVO> studyListByPage2(PageRequestDTO pageRequestDTO, String writer);
+    List<StudyVO> studyList(String writer);
+    StudyVO studyView(int idx);
+    int studyRegist(StudyVO studyVO);
+
 //    StudyVO studyPrev(int idx);
 //    StudyVO studyNext(int idx);
 //
-//    int studyRegist(StudyVO studyVO);
 //    int studyModify(StudyVO studyVO);
 //    int studyDelete(int idx);
 }

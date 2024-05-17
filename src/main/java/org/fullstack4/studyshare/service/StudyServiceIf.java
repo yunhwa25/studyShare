@@ -8,11 +8,14 @@ import org.fullstack4.studyshare.dto.StudyDTO;
 import java.util.List;
 
 public interface StudyServiceIf {
-//    int studyTotalCount(PageRequestDTO pageRequestDTO);
-//    PageResponseDTO<StudyDTO> studyListByPage(PageRequestDTO pageRequestDTO);
-    List<StudyDTO> studyList();
+    int studyTotalCount(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<StudyDTO> studyListByPage(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<StudyDTO> studyListByPage2(PageRequestDTO pageRequestDTO, String writer);
+    List<StudyDTO> studyList(String writer);
+    StudyDTO studyView(int idx);
+    int studyRegist(StudyDTO studyDTO);
 
-//    int studyRegist(StudyDTO dataDTO);
+
 //    Map<String, StudyDTO> studyView(int idx);
 //    StudyDTO studyModifyGet(int idx);
 //    int studyModify(StudyDTO dataDTO);

@@ -20,36 +20,68 @@ public class StudyServiceImpl implements StudyServiceIf {
     private final StudyMapper studyMapper;
     private final ModelMapper modelMapper;
 
-//    @Override
-//    public int studyTotalCount(PageRequestDTO pageRequestDTO) {
-//        return studyMapper.studyTotalCount(pageRequestDTO);
-//    }
-//
-//    @Override
-//    public PageResponseDTO<StudyDTO> studyListByPage(PageRequestDTO pageRequestDTO) {
-//        List<StudyVO> voList = studyMapper.studyListByPage(pageRequestDTO);
-//        List<StudyDTO> dtoList = voList.stream()
-//                .map(vo -> modelMapper.map(vo, StudyDTO.class))
-//                .collect(Collectors.toList());
-//        int total_count = studyMapper.studyTotalCount(pageRequestDTO);
-//
-//        PageResponseDTO<StudyDTO> pageResponseDTO = PageResponseDTO.<StudyDTO>withAll()
-//                .requestDTO(pageRequestDTO)
-//                .dtoList(dtoList)
-//                .total_count(total_count)
-//                .build();
-//
-//        return pageResponseDTO;
-//    }
+    @Override
+    public int studyTotalCount(PageRequestDTO pageRequestDTO) {
+        return studyMapper.studyTotalCount(pageRequestDTO);
+    }
 
     @Override
-    public List<StudyDTO> studyList() {
-        List<StudyVO> voList = studyMapper.studyList();
+    public PageResponseDTO<StudyDTO> studyListByPage(PageRequestDTO pageRequestDTO) {
+        List<StudyVO> voList = studyMapper.studyListByPage(pageRequestDTO);
+        List<StudyDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, StudyDTO.class))
+                .collect(Collectors.toList());
+        int total_count = studyMapper.studyTotalCount(pageRequestDTO);
+
+        PageResponseDTO<StudyDTO> pageResponseDTO = PageResponseDTO.<StudyDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return pageResponseDTO;
+    }
+
+    @Override
+    public PageResponseDTO<StudyDTO> studyListByPage2(PageRequestDTO pageRequestDTO, String writer) {
+        List<StudyVO> voList = studyMapper.studyListByPage2(pageRequestDTO, writer);
+        List<StudyDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, StudyDTO.class))
+                .collect(Collectors.toList());
+        int total_count = studyMapper.studyTotalCount(pageRequestDTO);
+
+        PageResponseDTO<StudyDTO> pageResponseDTO = PageResponseDTO.<StudyDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return pageResponseDTO;
+    }
+
+    @Override
+    public List<StudyDTO> studyList(String writer) {
+        List<StudyVO> voList = studyMapper.studyList(writer);
 
         List<StudyDTO> dtoList = voList.stream()
                 .map(vo -> modelMapper.map(vo, StudyDTO.class))
                 .collect(Collectors.toList());
 
         return dtoList;
+    }
+
+    @Override
+    public StudyDTO studyView(int idx) {
+        StudyVO studyVO = studyMapper.studyView(idx);
+        StudyDTO studyDTO = modelMapper.map(studyVO, StudyDTO.class);
+
+        return studyDTO;
+    }
+
+    @Override
+    public int studyRegist(StudyDTO studyDTO) {
+        StudyVO studyVO = modelMapper.map(studyDTO, StudyVO.class);
+        int result = studyMapper.studyRegist(studyVO);
+        return result;
     }
 }

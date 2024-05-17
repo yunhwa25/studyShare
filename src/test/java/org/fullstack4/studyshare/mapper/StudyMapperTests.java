@@ -20,7 +20,7 @@ public class StudyMapperTests {
 
     @Test
     public void testList() {
-        List<StudyVO> studyList = studyMapper.studyList();
+        List<StudyVO> studyList = studyMapper.studyList("test");
         studyList.forEach(list -> log.info(list));
     }
 }

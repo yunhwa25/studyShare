@@ -18,10 +18,11 @@ public class StudyVO {
     private String save_file_name;
     private String category;
     private String hashtag;
-    private int like;
+    private int like_cnt;
     private String sharer;
     private LocalDate reg_date;
     private LocalDate modify_date;
     private LocalDate display_start;
     private LocalDate display_end;
+    private String display_yn;
 }
