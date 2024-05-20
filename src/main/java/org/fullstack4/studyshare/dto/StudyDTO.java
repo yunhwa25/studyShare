@@ -5,13 +5,15 @@ import lombok.*;
 import java.time.LocalDate;
 
 @ToString
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class StudyDTO {
     private int idx;
     private String writer;
+    private String sender;
+    private String receiver;
     private String title;
     private String content;
     private String org_file_name;

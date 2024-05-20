@@ -42,7 +42,7 @@
                                 <span class="input-group-text">writer</span>
                                 <input type="text" name="writer" id="writer" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="${loginInfo}" maxlength="20" readonly>
                             </div>
-                            <div id="div_err_user_id" style="display: none"></div>
+                            <div id="div_err_writer" style="display: none"></div>
                         </div>
                         <div class="mb-3">
                             <div class="input-group">
@@ -74,29 +74,36 @@
                         </div>
                         <div class="mb-3">
                             <div class="input-group">
-                                <span class="input-group-text">sharer</span>
-                                <input type="text" name="sharer" id="sharer" value="${bbsDTO.sharer}" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <span class="input-group-text">receiver</span>
+                                <input type="text" name="receiver" id="receiver" value="${bbsDTO.receiver}" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <div id="div_err_sharer" style="display: none"></div>
+                            <div id="div_err_receiver" style="display: none"></div>
                         </div>
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">display_yn</span>
-                                <input type="text" name="display_yn" id="display_yn" value="${bbsDTO.display_yn}" maxlength="100" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <div class="form-control">
+                                    <label class="mx-3">노출
+                                        <input type="radio" name="display_yn" id="display_y" value="Y" checked>
+                                    </label>
+                                    <label>미노출
+                                        <input type="radio" name="display_yn" id="display_n" value="N">
+                                    </label>
+                                </div>
                             </div>
                             <div id="div_err_display_yn" style="display: none"></div>
                         </div>
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">display_start</span>
-                                <input type="date" class="form-control" name="display_start" id="display_start" value="${bbsDTO.display_start}" maxlength="10" />
+                                <input type="date" class="form-control" name="display_start" id="display_start" value="${bbsDTO.display_start}" maxlength="20" />
                             </div>
                             <div id="div_err_display_start" style="display: none"></div>
                         </div>
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">display_end</span>
-                                <input type="date" class="form-control" name="display_end" id="display_end" value="${bbsDTO.display_end}" maxlength="10" />
+                                <input type="date" class="form-control" name="display_end" id="display_end" value="${bbsDTO.display_end}" maxlength="20" />
                             </div>
                             <div id="div_err_display_end" style="display: none"></div>
                         </div>
@@ -106,41 +113,19 @@
                                 <input type="file" name="file" class="form-control"/>
                             </div>
                         </div>
-
-<%--                        <div class="input-group">--%>
-<%--                            <span class="input-group-text">interest</span>--%>
-<%--                            <div class="form-control">--%>
-<%--                                <div class="form-check form-check-inline" style="vertical-align: middle">--%>
-<%--                                    <input class="form-check-input" type="checkbox" name="interest" id="interest_0" value="스포츠" <c:out value="${bbsDTO.interest.contains(\"스포츠\") ? 'checked' : ''}"/>/>--%>
-<%--                                    <label class="form-check-label" for="interest_0">스포츠</label>--%>
-<%--                                </div>--%>
-<%--                                <div class="form-check form-check-inline" style="vertical-align: middle">--%>
-<%--                                    <input class="form-check-input" type="checkbox" name="interest" id="interest_1" value="여행" <c:out value="${bbsDTO.interest.contains(\"여행\") ? 'checked' : ''}"/>/>--%>
-<%--                                    <label class="form-check-label" for="interest_1">여행</label>--%>
-<%--                                </div>--%>
-<%--                                <div class="form-check form-check-inline" style="vertical-align: middle">--%>
-<%--                                    <input class="form-check-input" type="checkbox" name="interest" id="interest_2" value="영화" <c:out value="${bbsDTO.interest.contains(\"영화\") ? 'checked' : ''}"/>/>--%>
-<%--                                    <label class="form-check-label" for="interest_2">영화</label>--%>
-<%--                                </div>--%>
-<%--                                <div class="form-check form-check-inline" style="vertical-align: middle">--%>
-<%--                                    <input class="form-check-input" type="checkbox" name="interest" id="interest_3" value="음악" <c:out value="${bbsDTO.interest.contains(\"음악\") ? 'checked' : ''}"/>/>--%>
-<%--                                    <label class="form-check-label" for="interest_3">음악</label>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
                     </div>
                 </div>
             </div>
             <div class="mb-5">
                 <button type="submit" class="btn btn-outline-primary btn-sm">글등록</button>
                 <button type="reset" class="btn btn-outline-secondary btn-sm">초기화</button>
-                <button type="button" class="btn btn-outline-danger btn-sm" onclick="location.href='/bbs/list'">취소</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="location.href='/study/list'">취소</button>
             </div>
         </div>
     </form>
-    <%@ include file="/WEB-INF/common/footer.jsp" %>
+<%@ include file="/WEB-INF/common/footer.jsp" %>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="/resources/js/bootstrap.bundle.min.js"></script>
 <script>
     const serverValiseResult = {};
     <c:forEach items="${errors}" var="err">

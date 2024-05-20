@@ -9,22 +9,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class StudyVO {
+public class BbsVO {
     private int idx;
     private String writer;
-    private String sender;
-    private String receiver;
     private String title;
     private String content;
-    private String org_file_name;
-    private String save_file_name;
     private String category;
     private String hashtag;
-    private int like_cnt;
-    private String sharer;
     private LocalDate reg_date;
     private LocalDate modify_date;
     private LocalDate display_start;
     private LocalDate display_end;
     private String display_yn;
+    private int like_cnt;
 }

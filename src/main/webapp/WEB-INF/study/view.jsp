@@ -8,6 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
 <head>
@@ -34,14 +35,37 @@
     <h1 style="width: 75%; margin: 0 auto 20px; text-align: center;">나의 학습</h1>
     <form name="frmDelete" id="frmDelete" method="post" action="/study/delete">
         <input type="hidden" name="idx" id="idx" value="${bbs.idx}"/>
-        <div class="list-group" style="width: 75%; margin: 0 auto;">
+        <div class="list-group w1024" style="margin: 0 auto;">
             <div class="list-group-item" style="margin-bottom: 24px;">
-                <h2 class="mb-2">${bbs.title}</h2>
-                <small style="margin-right: 10px;">${bbs.writer}</small>
-                <small>${bbs.reg_date}</small>
-                <p class="fs-5 col-md-8" style="margin: 10px 0; border-top: 1px solid rgba(0,0,0,.125); width: 100%; padding-top: 8px;">
-                    ${bbs.content}
-                </p>
+                <h2 class="mb-2">제목 : ${bbs.title}</h2>
+                <div style="margin-bottom: 24px;">
+                    <small>좋아요 : ${bbs.like_cnt} |</small>
+                    <small>등록일 : ${bbs.reg_date} |</small>
+                    <small>오늘의 학습 노출 여부 : ${bbs.display_yn}</small>
+                    <c:if test="${bbs.display_yn ne 'N'}">
+                        <small>| 오늘의 학습 노출 기간 : ${bbs.display_start} ~ ${bbs.display_end}</small>
+                    </c:if>
+                </div>
+                <div style="margin-bottom: 24px;">
+                    <p class="fs-5 col-md-8" style="margin: 10px 0; border-top: 1px solid rgba(0,0,0,.125); width: 100%; padding-top: 8px;">
+                        <c:choose>
+                            <c:when test="${!empty bbs.save_file_name}">
+                                <img class="m-3" style="width: 400px; height: 600px;" src="<spring:url value='/resources/uploads/${bbs.save_file_name}'/>" />
+                            </c:when>
+                            <c:otherwise>
+                                <img class="m-3 w-50" style="width: 400px; height: 600px; filter: brightness(50%)" src="<spring:url value='/resources/img/img-character002.jpg'/>" />
+                            </c:otherwise>
+                        </c:choose>
+                        <span>${bbs.content}</span>
+                    </p>
+                </div>
+                <div style="margin-bottom: 24px;">
+                    <small>공유 받을 사람 : ${bbs.receiver}</small>
+                </div>
+                <div style="margin-bottom: 24px;">
+                    <small>분야 : <c:out value="${!empty bbs.category ? bbs.category : '없음' }" /> |</small>
+                    <small>해시태그 : #<c:out value="${!empty bbs.hashtag ? bbs.hashtag : '없음' }" /></small>
+                </div>
             </div>
             <div class="mb-5">
                 <button type="button" onclick="location.href='/study/list'" class="btn btn-outline-primary btn-sm px-4">목록</button>

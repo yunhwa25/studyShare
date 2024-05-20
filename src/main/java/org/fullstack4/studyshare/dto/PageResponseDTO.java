@@ -32,6 +32,8 @@ public class PageResponseDTO<E> {
 
     private String linkParams;
 
+    private String writer;
+
     PageResponseDTO() {}
 
     @Builder(builderMethodName = "withAll")
@@ -57,6 +59,8 @@ public class PageResponseDTO<E> {
         this.search_word = requestDTO.getSearch_word();
         this.search_date1 = requestDTO.getSearch_date1();
         this.search_date2 = requestDTO.getSearch_date2();
+
+        this.writer = requestDTO.getWriter();
 
 
         StringBuilder sb = new StringBuilder();

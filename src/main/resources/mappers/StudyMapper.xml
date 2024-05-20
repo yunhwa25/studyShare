@@ -3,30 +3,32 @@
         PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.studyshare.mapper.StudyMapper">
+<!--    <sql id="whereCondition">-->
+<!--        <where>-->
+<!--            <if test="search_type != null">-->
+<!--                <foreach collection="search_type" item="type" open="(" close=")" separator=" OR ">-->
+<!--                    <if test="search_word != null and search_word != ''">-->
+<!--                        <if test="type=='t'.toString()">-->
+<!--                            title LIKE CONCAT('%', #{search_word}, '%')-->
+<!--                        </if>-->
+<!--                        <if test="type=='u'.toString()">-->
+<!--                            user_id LIKE CONCAT('%', #{search_word}, '%')-->
+<!--                        </if>-->
+<!--                    </if>-->
+<!--                </foreach>-->
+<!--            </if>-->
+<!--            <if test="search_date1 != null and search_date2 != null and search_date1 != '' and search_date2 != ''">-->
+<!--                <trim prefix="and">-->
+<!--                    reg_date BETWEEN #{search_date1} AND #{search_date2}-->
+<!--                </trim>-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </sql>-->
     <sql id="whereCondition">
         <where>
-            <if test="search_type != null">
-                <foreach collection="search_type" item="type" open="(" close=")" separator=" OR ">
-                    <if test="search_word != null and search_word != ''">
-                        <if test="type=='t'.toString()">
-                            title LIKE CONCAT('%', #{search_word}, '%')
-                        </if>
-                        <if test="type=='u'.toString()">
-                            user_id LIKE CONCAT('%', #{search_word}, '%')
-                        </if>
-                    </if>
-                </foreach>
-            </if>
-            <if test="search_date1 != null and search_date2 != null and search_date1 != '' and search_date2 != ''">
-                <trim prefix="and">
-                    reg_date BETWEEN #{search_date1} AND #{search_date2}
-                </trim>
-            </if>
-        </where>
-    </sql>
-    <sql id="whereCondition2">
-        <where>
-            writer = #{writer}
+            <trim prefix="and">
+                writer = #{writer}
+            </trim>
             <if test="search_type != null">
                 <trim prefix="and">
                     <foreach collection="search_type" item="type" open="(" close=")" separator=" OR ">
@@ -49,45 +51,81 @@
         </where>
     </sql>
     <select id="studyTotalCount" resultType="int">
-        SELECT COUNT(*) FROM tbl_study_board
+        SELECT COUNT(*) FROM tbl_bbs
         <include refid="whereCondition"></include>
     </select>
     <select id="studyListByPage" resultType="org.fullstack4.studyshare.domain.StudyVO">
-        SELECT idx, writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer, reg_date, modify_date, display_start, display_end, display_yn
-        FROM tbl_study_board
+        SELECT tb.idx, tb.writer, tb.title, tb.content, tb.category, tb.hashtag, tb.reg_date, tb.modify_date, tb.display_start, tb.display_end, tb.display_yn, tb.like_cnt
+            , tf.org_file_name, tf.save_file_name, ts.sender, ts.receiver
+        FROM tbl_bbs AS tb
+        LEFT JOIN tbl_file AS tf ON tb.idx = tf.bbs_idx
+        LEFT JOIN tbl_share AS ts ON tb.idx = ts.bbs_idx
         <include refid="whereCondition"></include>
-        ORDER BY idx DESC
+        ORDER BY tb.idx DESC
         LIMIT #{page_skip_count}, #{page_size}
     </select>
-
-    <select id="studyListByPage2" resultType="org.fullstack4.studyshare.domain.StudyVO">
-        SELECT idx, writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer, reg_date, modify_date, display_start, display_end, display_yn
-        FROM tbl_study_board
-<!--        <include refid="whereCondition2"></include>-->
-        WHERE writer = #{writer}
-        ORDER BY idx DESC
-        LIMIT #{page_skip_count}, #{page_size}
-    </select>
-
-    <select id="studyList" resultType="org.fullstack4.studyshare.domain.StudyVO">
-        SELECT idx, writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer, reg_date, modify_date, display_start, display_end, display_yn
-        FROM tbl_study_board
-        WHERE writer = #{writer}
-        ORDER BY idx DESC
-    </select>
-
     <select id="studyView" resultType="org.fullstack4.studyshare.domain.StudyVO">
-        SELECT idx, writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer, reg_date, modify_date, display_start, display_end, display_yn
-        FROM tbl_study_board
-        WHERE idx = #{idx}
+        SELECT tb.idx, tb.writer, tb.title, tb.content, tb.category, tb.hashtag, tb.reg_date, tb.modify_date, tb.display_start, tb.display_end, tb.display_yn, tb.like_cnt
+             , tf.org_file_name, tf.save_file_name, ts.sender, ts.receiver
+        FROM tbl_bbs AS tb
+                 INNER JOIN tbl_file AS tf ON tb.idx = tf.bbs_idx
+                 INNER JOIN tbl_share AS ts ON tb.idx = ts.bbs_idx
+        WHERE tb.idx = #{idx}
     </select>
-
-    <insert id="studyRegist">
-        INSERT INTO tbl_study_board(writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer
-                                   , reg_date, modify_date, display_start, display_end, display_yn)
-        VALUES (#{writer}, #{title}, #{content}, #{org_file_name}, #{save_file_name}, #{category}, #{hashtag}, #{like_cnt}, #{sharer}
-               , #{reg_date}, #{modify_date}, #{display_start}, #{display_end}, #{display_yn})
+<!--    <insert id="studyRegist">-->
+<!--        INSERT INTO tbl_bbs(writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer-->
+<!--                                   , reg_date, modify_date, display_start, display_end, display_yn)-->
+<!--        VALUES (#{writer}, #{title}, #{content}, #{org_file_name}, #{save_file_name}, #{category}, #{hashtag}, #{like_cnt}, #{sharer}-->
+<!--               , #{reg_date}, #{modify_date}, #{display_start}, #{display_end}, #{display_yn})-->
+<!--    </insert>-->
+    <insert id="bbsRegist" parameterType="org.fullstack4.studyshare.domain.BbsVO" useGeneratedKeys="true" keyProperty="idx" keyColumn="idx">
+        INSERT INTO tbl_bbs(writer, title, content, category, hashtag, reg_date, display_start, display_end, display_yn, like_cnt)
+               VALUES(#{writer}, #{title}, #{content}, #{category}, #{hashtag}, NOW(), #{display_start}, #{display_end}, #{display_yn}, 0)
     </insert>
+    <insert id="fileRegist">
+        INSERT INTO tbl_file(bbs_idx, org_file_name, save_file_name) VALUES(#{bbs_idx}, #{org_file_name}, #{save_file_name})
+    </insert>
+    <insert id="shareRegist">
+        INSERT INTO tbl_share(bbs_idx, sender, receiver) VALUES(#{bbs_idx}, #{sender}, #{receiver})
+    </insert>
+
+<!--    <select id="studyTotalCount" resultType="int">-->
+<!--        SELECT COUNT(*) FROM tbl_study_board-->
+<!--        <include refid="whereCondition"></include>-->
+<!--    </select>-->
+<!--    <select id="studyListByPage" resultType="org.fullstack4.studyshare.domain.StudyVO">-->
+<!--        SELECT idx, writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer, reg_date, modify_date, display_start, display_end, display_yn-->
+<!--        FROM tbl_study_board-->
+<!--        <include refid="whereCondition"></include>-->
+<!--        ORDER BY idx DESC-->
+<!--        LIMIT #{page_skip_count}, #{page_size}-->
+<!--    </select>-->
+<!--    <select id="studyListByPage2" resultType="org.fullstack4.studyshare.domain.StudyVO">-->
+<!--        SELECT idx, writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer, reg_date, modify_date, display_start, display_end, display_yn-->
+<!--        FROM tbl_study_board-->
+<!--        <include refid="whereCondition"></include>-->
+<!--        ORDER BY idx DESC-->
+<!--        LIMIT #{page_skip_count}, #{page_size}-->
+<!--    </select>-->
+<!--    <select id="studyList" resultType="org.fullstack4.studyshare.domain.StudyVO">-->
+<!--        SELECT idx, writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer, reg_date, modify_date, display_start, display_end, display_yn-->
+<!--        FROM tbl_study_board-->
+<!--        WHERE writer = #{writer}-->
+<!--        ORDER BY idx DESC-->
+<!--    </select>-->
+
+<!--    <select id="studyView" resultType="org.fullstack4.studyshare.domain.StudyVO">-->
+<!--        SELECT idx, writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer, reg_date, modify_date, display_start, display_end, display_yn-->
+<!--        FROM tbl_study_board-->
+<!--        WHERE idx = #{idx}-->
+<!--    </select>-->
+
+<!--    <insert id="studyRegist">-->
+<!--        INSERT INTO tbl_study_board(writer, title, content, org_file_name, save_file_name, category, hashtag, like_cnt, sharer-->
+<!--                                   , reg_date, modify_date, display_start, display_end, display_yn)-->
+<!--        VALUES (#{writer}, #{title}, #{content}, #{org_file_name}, #{save_file_name}, #{category}, #{hashtag}, #{like_cnt}, #{sharer}-->
+<!--               , #{reg_date}, #{modify_date}, #{display_start}, #{display_end}, #{display_yn})-->
+<!--    </insert>-->
 
 <!--    <select id="dataPrev" resultType="org.fullstack4.bookstore.domain.DataVO">-->
 <!--        SELECT data_idx, title-->

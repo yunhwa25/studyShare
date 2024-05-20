@@ -87,20 +87,29 @@
         <button class="btn btn-outline-secondary btn-sm px-4" type="button">좋아요순</button>
     </div>
     <div class="list-group w1024" style="margin: 0 auto; margin-bottom: 48px;">
-        <c:forEach items="${responseDTO.dtoList}" var="list" varStatus="status">
-            <a href="/study/view?idx=${list.idx}" class="list-group-item list-group-item-action" aria-current="true">
-                <div class="d-flex w-100 justify-content-between" style="margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid rgba(0,0,0,.125)">
-                    <h5 class="mb-1">제목 : ${list.title}</h5>
-                    <small>좋아요 : ${list.like_cnt}</small>
+        <c:choose>
+            <c:when test="${!empty responseDTO && responseDTO.total_count > 0}">
+                <c:forEach items="${responseDTO.dtoList}" var="list" varStatus="status">
+                    <a href="/study/view?idx=${list.idx}" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between" style="margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid rgba(0,0,0,.125)">
+                            <h5 class="mb-1">제목 : ${list.title}</h5>
+                            <small>좋아요 : ${list.like_cnt}</small>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-1" style="padding-bottom: 24px;">등록일 : ${list.reg_date}</p>
+                            <p class="mb-1" style="padding-bottom: 24px;">오늘의 학습 노출여부 : ${list.display_yn}</p>
+                            <p class="mb-1" style="padding-bottom: 24px;">오늘의 학습 노출기간 : ${list.display_start} ~ ${list.display_end}</p>
+                        </div>
+                        <small>id : ${list.writer}</small>
+                    </a>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <div>
+                    <p class="mb-1 text-center" style="padding-bottom: 24px;">등록된 학습 글이 존재하지 않습니다.</p>
                 </div>
-                <div class="d-flex justify-content-between">
-                    <p class="mb-1" style="padding-bottom: 24px;">등록일 : ${list.reg_date}</p>
-                    <p class="mb-1" style="padding-bottom: 24px;">오늘의 학습 노출여부 : ${list.display_yn}</p>
-                    <p class="mb-1" style="padding-bottom: 24px;">오늘의 학습 노출기간 : ${list.display_start} ~ ${list.display_end}</p>
-                </div>
-                <small>id : ${list.writer}</small>
-            </a>
-        </c:forEach>
+            </c:otherwise>
+        </c:choose>
         <div class="float-end">
             <a href="/study/regist" class="btn btn-primary my-3" style="float: right;">학습 등록</a>
         </div>
