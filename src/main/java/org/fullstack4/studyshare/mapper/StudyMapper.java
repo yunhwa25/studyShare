@@ -20,11 +20,13 @@ public interface StudyMapper {
     int bbsRegist(BbsVO bbsVO);
     int fileRegist(FileVO fileVO);
     int shareRegist(ShareVO shareVO);
+    int bbsModify(BbsVO bbsVO);
+    int fileModify(FileVO fileVO);
+    int shareModify(ShareVO shareVO);
 
 
 //    StudyVO studyPrev(int idx);
 //    StudyVO studyNext(int idx);
 //
-//    int studyModify(StudyVO studyVO);
 //    int studyDelete(int idx);
 }

@@ -10,17 +10,18 @@ import java.util.Map;
 public interface StudyServiceIf {
     int studyTotalCount(PageRequestDTO pageRequestDTO);
     PageResponseDTO<StudyDTO> studyListByPage(PageRequestDTO pageRequestDTO);
-//    PageResponseDTO<StudyDTO> studyListByPage2(PageRequestDTO pageRequestDTO);
 //    List<StudyDTO> studyList(String writer);
     Map<String, StudyDTO> studyView(int idx);
 
-//    int studyRegist(StudyDTO studyDTO);
     int bbsRegist(BbsDTO bbsDTO);
     int fileRegist(FileDTO fileDTO);
     int shareRegist(ShareDTO shareDTO);
 
+    int bbsModify(int idx);
+    int fileModify(int idx);
+    int shareModify(int idx);
 
-//    Map<String, StudyDTO> studyView(int idx);
+
 //    StudyDTO studyModifyGet(int idx);
 //    int studyModify(StudyDTO dataDTO);
 //    int studyDelete(int idx);

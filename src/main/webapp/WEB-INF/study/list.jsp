@@ -48,8 +48,8 @@
                             <div class="input-group-text">
                                 <label for="search_type_0" style="margin-right: 12px;"><input style="vertical-align: middle;" class="form-check-input mt-0"  type="checkbox" id="search_type_0" name="search_type" value="t"
                                 ${pageRequestDTO.checkType("t")? "checked" : ""}/> 제목</label>
-                                <label for="search_type_1"><input style="vertical-align: middle;" class="form-check-input mt-0"  type="checkbox" id="search_type_1" name="search_type" value="u"
-                                ${pageRequestDTO.checkType("u")? "checked" : ""}/> 내용</label>
+                                <label for="search_type_1"><input style="vertical-align: middle;" class="form-check-input mt-0"  type="checkbox" id="search_type_1" name="search_type" value="c"
+                                ${pageRequestDTO.checkType("c")? "checked" : ""}/> 내용</label>
                             </div>
                             <input type="text" class="form-control" id="search_word" name="search_word" placeholder="검색어를 입력하세요." aria-label="Text input with checkbox"
                                    value='<c:out value="${pageRequestDTO.search_word}"/>'>

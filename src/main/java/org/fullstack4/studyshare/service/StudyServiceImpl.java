@@ -95,4 +95,19 @@ public class StudyServiceImpl implements StudyServiceIf {
         int result = studyMapper.shareRegist(shareVO);
         return result;
     }
+
+    @Override
+    public int bbsModify(int idx) {
+        return 0;
+    }
+
+    @Override
+    public int fileModify(int idx) {
+        return 0;
+    }
+
+    @Override
+    public int shareModify(int idx) {
+        return 0;
+    }
 }
